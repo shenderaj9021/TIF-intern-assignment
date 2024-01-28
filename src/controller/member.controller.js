@@ -10,10 +10,9 @@ async function addMember(req, res) {
     try {
         // Extract data from the request body
         const { community, user, role } = req.body;
-        console.log(`community ${community} user ${user} role ${role}`)
         // Check if the current user is the owner (Community Admin) of the community
         const communityInfo = await Community.findById(community);
-        console.log(communityInfo)
+       
       
         if (!communityInfo || communityInfo.owner !== req.body.userID) {
           return res.status(403).json({ error: "NOT_ALLOWED_ACCESS" });
@@ -47,6 +46,8 @@ async function addMember(req, res) {
         res.status(500).json({ error: 'Internal Server Error' });
       }
 }
+
+// controller to remover memeber
 async function removeMember(req, res) {
   try {
     const memberId = req.params.id;
@@ -55,18 +56,21 @@ async function removeMember(req, res) {
    
   
     const member = await Member.findById(memberId)
+    // to check valid member id
     if(!member){
       return res.status(400).json({ error:"No such member found"});
     }
+    // to check valid community id
     const community = await Community.findById(member.community);
     if(!community){
       return res.status(403).json({error:"No Such community found "});
     }
+    // check whether current user is owner of community or not
     if(req.body.userID===community.owner){
       await Member.findByIdAndRemove(memberId);
       return res.status(200).json({status:true});
     }
-    console.log(member)
+   
     // to check whether user is moderator or not
     const userMember = await Member.findOne({user:req.body.userID,community:member.community})
     if(!userMember){

@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     type:Date,
     default:Date.now
   }
-});
+},{ versionKey: false });
 
 // Middleware to update updated_at field automatically 
 userSchema.pre('save', function (next) {

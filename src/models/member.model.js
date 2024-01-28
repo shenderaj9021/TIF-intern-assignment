@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 
+// Schema for member
 const memberSchema = new mongoose.Schema({
     _id:{type:String},
     community: {
@@ -18,7 +19,7 @@ const memberSchema = new mongoose.Schema({
         type:Date,
         default:Date.now
     }
-})
+},{ versionKey: false })
 
 
 const Member = mongoose.model("Member",memberSchema);

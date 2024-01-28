@@ -7,7 +7,7 @@ async function createRole(req, res) {
     // Validate request body
     const record = req.body;
     const name = record.name;
-
+    // To validate name
     if (!name || name.length < 2) {
         return res.status(400).json({
             status: false,
@@ -50,6 +50,8 @@ async function createRole(req, res) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
+
+// controller to get all roles
 async function getAllRoles(req, res) {
     try {
       const page = parseInt(req.query.page) || 1;

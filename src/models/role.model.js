@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
-const {Snowflake} = require('@theinternetfolks/snowflake')
 
+
+// schema for Role
 const roleSchema = new mongoose.Schema({
     _id:{type:String},
     name :{type:String,maxlength:64},
