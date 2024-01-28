@@ -23,5 +23,8 @@ To install and run this project locally, follow these steps:
    ```bash
    npm start
    ```
+5. Open your web browser and navigate to http://localhost:4000
+
+   Currently for evalution purpose .env file is public.
 
 
